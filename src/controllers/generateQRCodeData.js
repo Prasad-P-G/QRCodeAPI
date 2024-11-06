@@ -14,7 +14,7 @@ const qrCodeGenratorController = async (req, res) => {
       throw new Error("patient Does not available!");
     }
 
-    const qrCodeDate = QrcodeGenerator(patient);
+    const qrCodeData = QrcodeGenerator(patient);
 
     const dataToValidate =
       patient.id +
@@ -34,7 +34,7 @@ const qrCodeGenratorController = async (req, res) => {
     }
 
     res.status(200).json({
-      data: qrCodeDate,
+      data: qrCodeData,
       success: true,
       error: false,
       message: "QR Code Generated!",

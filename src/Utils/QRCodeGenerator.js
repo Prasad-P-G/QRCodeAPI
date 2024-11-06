@@ -11,6 +11,7 @@ const QrcodeGenerator = (patient) => {
       patient.mobile +
       patient.address +
       moment(patient.admissiondate).format("LLLL");
+
     // const payload = {
     //   id: patient.id,
     //   name: patient.name,
