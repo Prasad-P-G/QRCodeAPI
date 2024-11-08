@@ -37,7 +37,7 @@ const qrCodeGenratorController = async (req, res) => {
       const code = qrcodeImageGenerator(qrCodeData, patient.id);
 
       res.status(200).json({
-        data: qrCodeData,
+        data: { qrData: qrCodeData, QrCodeDataUrl: code },
         success: true,
         error: false,
         message: "QR Code Generated!",
