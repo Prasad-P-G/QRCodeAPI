@@ -34,14 +34,37 @@ const qrCodeGenratorController = async (req, res) => {
       console.log("response fter updte,", responseData);
 
       //Call QR Code Image Generator
-      const code = qrcodeImageGenerator(qrCodeData, patient.id);
-
-      res.status(200).json({
-        data: { qrData: qrCodeData, QrCodeDataUrl: code },
-        success: true,
-        error: false,
-        message: "QR Code Generated!",
+      // const code = qrcodeImageGenerator(qrCodeData, patient.id);
+      // console.log("returned data", code);
+      qrCode.toDataURL(JSON.stringify(qrCodeData), (err, code) => {
+        if (err) return console.log(err);
+        return res.status(200).json({
+          data: { qrData: qrCodeData, QrCodeDataUrl: code },
+          dataurl: 0,
+          success: true,
+          error: false,
+          message: "QR Code Generated!",
+        });
       });
+
+      // qrCode.toDataURL(JSON.stringify(qrCodeData), (err, code) => {
+      //   if (err) return console.log(err);
+      //   return res.status(200).json({
+      //     data: { qrData: qrCodeData },
+      //     dataurl: 0,
+      //     success: true,
+      //     error: false,
+      //     message: "QR Code Generated!",
+      //   });
+      // });
+
+      // res.status(200).json({
+      //   data: { qrData: qrCodeData, QrCodeDataUrl: code },
+      //   dataurl: 0,
+      //   success: true,
+      //   error: false,
+      //   message: "QR Code Generated!",
+      // });
     }
   } catch (err) {
     res.status(400).json({
@@ -64,11 +87,15 @@ const qrcodeImageGenerator = (qrCodeData, patientID) => {
   // });
 
   //type-2 - generating base64 data url
+  let result = "";
   qrCode.toDataURL(JSON.stringify(qrCodeData), (err, code) => {
     if (err) return console.log(err);
-    console.log(code);
-    return code;
+    // console.log(code);
+    result = code;
+    // return code;
   });
+
+  return result;
 
   // type-3 - Generating png file
   // qrCode.toFile(patientID + ".png", JSON.stringify(qrCodeData), (err) => {

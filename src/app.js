@@ -5,7 +5,7 @@ const connectDB = require("./db/conn");
 const router = require("./routers");
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 
 // to specific
 // app.use(
